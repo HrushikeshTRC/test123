@@ -1,0 +1,15 @@
+.zoomLevel {
+    position: relative;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+}
+
+.zoomText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-70%, -90%);
+    font-size: 0.5rem;
+    font-weight: 900;
+}

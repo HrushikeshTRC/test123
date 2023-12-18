@@ -1,4 +1,4 @@
-import { Button } from '@radix-ui/themes';
+import { Button, IconButton } from '@radix-ui/themes';
 import { SymbolIcon } from "@radix-ui/react-icons"
 
 type Props = {
@@ -10,14 +10,13 @@ const ZoomLayerControl = (props: Props) => {
 
     return (
         <>
-            <Button
-                title={"Zoom to Layer"}
-                className="btn-sm btn-icon toolbar-control"
+            <IconButton
                 onClick={handleZoomLayer}
-                style={{ top: "-26px" }}
+                variant='surface'
+                size="2"
             >
                 <SymbolIcon />
-            </Button>
+            </IconButton>
         </>
     );
 };

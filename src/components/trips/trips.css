@@ -1,0 +1,11 @@
+.ol-zoom-out,
+.ol-zoom-in {
+    width: 31px !important;
+    height: 24px !important;
+}
+
+
+
+.ol-control {
+    padding: 0;
+}

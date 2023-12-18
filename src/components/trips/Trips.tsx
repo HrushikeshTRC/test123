@@ -3,10 +3,10 @@ import { unByKey } from 'ol/Observable'
 import OlMap from '../../library/olReact/map/OlMap'
 import MapProvider from '../../library/olReact/MapProvider'
 import { Layers, TileLayer, VectorLayer } from '../../library/olReact/layers'
-import { osm, vector } from '../../library/olReact/source'
+import { osm, vector, xyz } from '../../library/olReact/source'
 import GeoJSON from 'ol/format/GeoJSON';
-import { Map, View, MapBrowserEvent, Feature } from 'ol'
-import { CENTER, EXTENT_OPS, MAIN_LAYER_ID, MAX_ZOOM, POINT_STYLE, SELECTED_POINT_STYLE } from '../../constants'
+import { MapBrowserEvent, Feature } from 'ol'
+import { CENTER, DEFAULT_BASEMAP, EXTENT_OPS, MAIN_LAYER_ID, POINT_STYLE, SATELLITE_BASEMAP, SATELLITE_BASEMAP_URL, SELECTED_POINT_STYLE, map } from '../../constants'
 import FeatureInfoOverlay from '../featureInfoOverlay/FeatureInfoOverlay'
 import { Coordinate } from 'ol/coordinate'
 import { Geometry } from 'ol/geom'
@@ -15,15 +15,12 @@ import olSelect, { SelectEvent } from 'ol/interaction/Select'
 import { Controls } from '../../library/olReact/controls'
 import CustomControl from '../../library/olReact/controls/customControl/CustomControl'
 import ZoomLayerControl from '../zoomLayerControl/ZoomLayerControl'
-
-const map = new Map({
-    view: new View({
-        center: CENTER,
-        zoom: 4.7,
-        maxZoom: MAX_ZOOM,
-        // minZoom: 4,
-    }),
-});
+import BaseMapControl from '../baseMap/BaseMapControl'
+import BaseMap from '../baseMap/BaseMap'
+import "./trips.css"
+import ZoomInControl from '../zoomControl/ZoomInControl'
+import ZoomOutControl from '../zoomControl/ZoomOutControl'
+import ZoomLevelControl from '../zoomLevelControl/ZoomLevelControl'
 
 const Trips = () => {
     const [featureInfoPos, setFeatureInfoPos] = useState<Coordinate>();
@@ -33,6 +30,8 @@ const Trips = () => {
         url: "http://localhost:8080/geoserver/ne/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ne:trips&outputFormat=application/json",
         format: new GeoJSON(),
     }))
+    const [showTileBar, setShowTileBar] = useState(false)
+    const [activeBaseMap, setActiveBaseMap] = useState(DEFAULT_BASEMAP);
 
     // useEffect(() => {
     //     const key = map.on('pointermove', function (e) {
@@ -103,6 +102,14 @@ const Trips = () => {
                         <Layers>
                             <TileLayer
                                 initialSource={osm()}
+                                visible={activeBaseMap === DEFAULT_BASEMAP}
+                            />
+                            <TileLayer
+                                initialSource={xyz({
+                                    url: SATELLITE_BASEMAP_URL,
+                                    maxZoom: 23,
+                                })}
+                                visible={activeBaseMap === SATELLITE_BASEMAP}
                             />
                             <VectorLayer
                                 style={POINT_STYLE}
@@ -114,9 +121,42 @@ const Trips = () => {
                         <Controls>
                             <CustomControl
                                 control={
+                                    <ZoomInControl />
+                                }
+                                controlPosition={{ top: "1rem", left: "0.5rem" }}
+                            />
+                            <CustomControl
+                                control={
+                                    <ZoomOutControl />
+                                }
+                                controlPosition={{ top: "3.2rem", left: "0.5rem" }}
+                            />
+                            <CustomControl
+                                control={
                                     <ZoomLayerControl handleZoomLayer={handleZoomLayerControl} />
                                 }
-                                controlPosition={{ top: "9rem", left: "0.5rem" }}
+                                controlPosition={{ top: "6.5rem", left: "0.5rem" }}
+                            />
+                            <CustomControl
+                                control={
+                                    <BaseMapControl
+                                        showTileBar={showTileBar}
+                                        handleTilebarControl={(value) => setShowTileBar(value)}
+                                    />
+                                }
+                                controlContent={
+                                    <BaseMap
+                                        activeBaseMap={activeBaseMap}
+                                        handleBaseMap={(value) => setActiveBaseMap(value)}
+                                    />
+                                }
+                                controlPosition={{ bottom: "1rem", left: "0.5rem" }}
+                                controlContentPosition={{ bottom: "1rem", left: "2.7rem" }}
+                                showContent={showTileBar}
+                            />
+                            <CustomControl
+                                control={<ZoomLevelControl />}
+                                controlPosition={{ bottom: "-0.6rem", right: "11.8rem" }}
                             />
                         </Controls>
                     </OlMap>

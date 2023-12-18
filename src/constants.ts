@@ -1,4 +1,6 @@
-import { FitOptions } from "ol/View";
+import { Map } from "ol";
+import View, { FitOptions } from "ol/View";
+import { defaults } from "ol/control";
 import { fromLonLat } from "ol/proj";
 import { Circle, Fill, Stroke, Style } from 'ol/style'
 
@@ -33,3 +35,20 @@ export const SELECTED_POINT_STYLE = new Style({
         }),
     })
 })
+
+export const view = new View({
+    center: CENTER,
+    zoom: 4.7,
+    maxZoom: MAX_ZOOM,
+    // minZoom: 4,
+})
+
+export const map = new Map({
+    view,
+    controls: defaults({ zoom: false })
+});
+
+export const DEFAULT_BASEMAP = "Default"
+export const SATELLITE_BASEMAP = "Satellite"
+
+export const SATELLITE_BASEMAP_URL = 'http://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}'
