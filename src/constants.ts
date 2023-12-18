@@ -11,7 +11,7 @@ export const FEATURE_INFO_OVERLAY_ID = "featureInfoOverlay"
 export const EXTENT_OPS: FitOptions = {
     padding: [100, 100, 100, 100],
     duration: 500,
-    maxZoom: 15
+    maxZoom: 8
 }
 
 export const POINT_STYLE = new Style({

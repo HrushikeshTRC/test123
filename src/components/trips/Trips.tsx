@@ -135,7 +135,7 @@ const Trips = () => {
                                 control={
                                     <ZoomLayerControl handleZoomLayer={handleZoomLayerControl} />
                                 }
-                                controlPosition={{ top: "6.5rem", left: "0.5rem" }}
+                                controlPosition={{ top: "6rem", left: "0.5rem" }}
                             />
                             <CustomControl
                                 control={
@@ -151,7 +151,7 @@ const Trips = () => {
                                     />
                                 }
                                 controlPosition={{ bottom: "1rem", left: "0.5rem" }}
-                                controlContentPosition={{ bottom: "1rem", left: "2.7rem" }}
+                                controlContentPosition={{ bottom: "0.95rem", left: "2.6rem" }}
                                 showContent={showTileBar}
                             />
                             <CustomControl

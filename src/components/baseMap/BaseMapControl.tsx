@@ -1,5 +1,5 @@
 
-import { Button, IconButton } from '@radix-ui/themes';
+import { IconButton } from '@radix-ui/themes';
 import { StackIcon } from "@radix-ui/react-icons"
 
 type Props = {

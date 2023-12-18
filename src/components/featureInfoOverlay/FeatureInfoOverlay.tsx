@@ -3,7 +3,7 @@ import Overlay from "../../library/olReact/overlay/Overlay"
 import { Coordinate } from 'ol/coordinate'
 import "./featureInfoOverlay.css"
 import { FeatureLike } from "ol/Feature"
-import { Button, Card, Avatar, Flex, Box, Text } from '@radix-ui/themes';
+import { Box, Text, IconButton } from '@radix-ui/themes';
 import { Cross1Icon } from "@radix-ui/react-icons"
 
 type Props = {
@@ -22,9 +22,9 @@ const FeatureInfoOverlay = (props: Props) => {
                     <div className={`ol-popup ${featureInfoPos ? "active" : ""}`}>
                         <div className="popup-header">
                             <Text className="popup-title">{featureInfoData?.get("name")}</Text>
-                            <Button size="1" variant="soft" onClick={handleClose} >
+                            <IconButton size="1" variant="soft" onClick={handleClose} >
                                 <Cross1Icon />
-                            </Button>
+                            </IconButton>
                         </div>
                         <div className="popup-content">
                             <Box>
