@@ -13,7 +13,6 @@ const BaseMapControl = (props: Props) => {
     return (
         <>
             <IconButton
-                title={"Map Tiles"}
                 variant="surface"
                 onClick={() => handleTilebarControl(!showTileBar)}
                 size="2"

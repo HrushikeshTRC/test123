@@ -18,7 +18,8 @@
     bottom: 12px;
     left: -50px;
     min-width: 300px;
-    padding: 0.5rem 1rem;
+    max-width: 350px;
+    padding: 0.5rem 0.5rem;
 }
 
 .popup-header {
@@ -57,18 +58,8 @@
     margin-left: -11px;
 }
 
-/* .ol-popup-closer {
-    text-decoration: none;
-    position: absolute;
-    top: 2px;
-    right: 8px;
-}
-
-.ol-popup-closer:after {
-    content: "✖";
-} */
-
 .popup-content {
     margin-top: 1rem;
     overflow: auto;
+    padding: 0.5rem;
 }
